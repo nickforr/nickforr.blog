@@ -1,0 +1,32 @@
+---
+title: Trying out blogdown
+author: nickforr
+date: '2017-05-24'
+slug: trying-out-blogdown
+categories:
+  - R
+tags:
+  - R Markdown
+description: ''
+draft: yes
+topics: []
+---
+
+## Introduction
+
+This is just a quick check to see if I can easily add posts to this blog using  [blogdown](https://github.com/rstudio/blogdown).
+
+With a lack of imagination, I'm using the mtcars data set and ggplot (via [tidyverse](http://tidyverse.org)) to check it's working ok (using [viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) for colours).
+
+```{r test, echo = FALSE, message = FALSE}
+library(tidyverse)
+library(viridis)
+mtcars %>%
+  #mutate(gear = factor(gear)) %>%
+  ggplot() +
+  theme_bw() +
+  geom_point(aes(x = disp, y = hp, colour = mpg)) +
+  scale_color_viridis() +
+  facet_wrap(~gear) +
+  theme(strip.background = element_rect(fill = "transparent"))
+```

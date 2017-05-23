@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on nickforr</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on nickforr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Trying out blogdown</title>
+      <link>/post/trying-out-blogdown/</link>
+      <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/trying-out-blogdown/</guid>
+      <description>Introduction This is just a quick check to see if I can easily add posts to this blog using blogdown.
+With a lack of imagination, I’m using the mtcars data set and ggplot (via tidyverse) to check it’s working ok (using viridis for colours).
+ </description>
+    </item>
+    
+  </channel>
+</rss>
