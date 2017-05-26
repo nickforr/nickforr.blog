@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Testing CI of blog</title>
+      <link>/post/testing-ci-of-blog/</link>
+      <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/testing-ci-of-blog/</guid>
+      <description>Testing continuous integration of blog Another brief post in order to test whether the setup for CI through Travis is working properly.
+Some helpful links that I relied on to set everything up:
+https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws http://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-cloudfront-walkthrough.html
+ </description>
+    </item>
     
     <item>
       <title>Trying out blogdown</title>
