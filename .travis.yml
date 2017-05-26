@@ -5,9 +5,9 @@ language: python
 python: 3.5
 install: pip install awscli
 script:
-- aws s3 sync --acl public-read --sse --delete /public/ s3://www.nickforr.com
+- aws s3 sync --acl public-read --sse --delete /public/ s3://nickforr.com
 - aws configure set preview.cloudfront true
-- aws cloudfront create-invalidation --distribution-id xxx --paths '/*'
+- aws cloudfront create-invalidation --distribution-id E9H499YI00XN5 --paths '/*'
 env:
   global:
   - secure: MihfjCXmRJ/IsVKj2NRrra7kv6TXUOdSxBVX59KM1LfkCJuBAD9K3RMcvEK9ludGwNDJxRHHCna6canJjPs4E7KkZgGjP2iHrdJT4cbwu1HuaShD7nT+LV7r+t3Ny47E9YYUCx2St0KlEa+N30BADeZOWJikpJL5QYnORS2Unka0sogsYi1FJBaL0yQ8UyAIfn566TWbDaFJo1KaQ7DQBOuUDLPZqF1swRGx7mqHcnJAiLbhSYbqCR5VojCX+BMWgfCR1PqgqVB15hsAu/ulDi4Te4XKvzjjo2ZoMHYov6emVUwUq9KRX9awBZym4eWsKt81gXXRU5SxT6rP88XssDCxl8ZnW604qGy9mMqZLZd/JAsqHM1k5Gd2hserU/kNDYHFYCuyRhwyG3yQDfk8NOMV5AdGdq5+eGCSJSbfVuoP3yOWiekHlaSGqYY8VhLOXpsUJ1dM3Q3+ogr4fWFt+ScajoZlQ/j4208HfAu7bdCoO5xdM2rjjQhGw6DL5iwUxbPeJvTHiQTdvMMUhtqzf2XAc89jgIWwHeB+E+LRoBM3RDzPz9Wd9GgZs0xpzdvX+9lM1+242kzebCaQGLzRXG2d/j7pt3zy3Sv1Q8SUwzvhj5r/sUkn0VxpKvLqZgL5hSapZDnRLHCn6S/tykAwG3s404YfyxPddyX70bnFGy8=
