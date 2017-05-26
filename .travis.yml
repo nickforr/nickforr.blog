@@ -5,7 +5,7 @@ language: python
 python: 3.5
 install: pip install awscli
 script:
-- aws s3 sync --acl public-read --sse --delete /public/ s3://nickforr.com
+- aws s3 sync --acl public-read --sse --delete $TRAVIS_BUILD_DIR/public/ s3://nickforr.com
 - aws configure set preview.cloudfront true
 - aws cloudfront create-invalidation --distribution-id E9H499YI00XN5 --paths '/*'
 env:
