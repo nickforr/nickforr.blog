@@ -1,7 +1,14 @@
-deploy:
-  provider: s3
-  access_key_id: "YOUR AWS ACCESS KEY"
-  secret_access_key: "YOUR AWS SECRET KEY"
-  bucket: "S3 Bucket"
-  skip_cleanup: true
-  region: eu-west-1
+branches:
+  only:
+  - master
+language: python
+python: 3.5
+install: pip install awscli
+script:
+- aws s3 sync --acl public-read --sse --delete /public/ s3://www.nickforr.com
+- aws configure set preview.cloudfront true
+- aws cloudfront create-invalidation --distribution-id xxx --paths '/*'
+env:
+  global:
+  - secure: MihfjCXmRJ/IsVKj2NRrra7kv6TXUOdSxBVX59KM1LfkCJuBAD9K3RMcvEK9ludGwNDJxRHHCna6canJjPs4E7KkZgGjP2iHrdJT4cbwu1HuaShD7nT+LV7r+t3Ny47E9YYUCx2St0KlEa+N30BADeZOWJikpJL5QYnORS2Unka0sogsYi1FJBaL0yQ8UyAIfn566TWbDaFJo1KaQ7DQBOuUDLPZqF1swRGx7mqHcnJAiLbhSYbqCR5VojCX+BMWgfCR1PqgqVB15hsAu/ulDi4Te4XKvzjjo2ZoMHYov6emVUwUq9KRX9awBZym4eWsKt81gXXRU5SxT6rP88XssDCxl8ZnW604qGy9mMqZLZd/JAsqHM1k5Gd2hserU/kNDYHFYCuyRhwyG3yQDfk8NOMV5AdGdq5+eGCSJSbfVuoP3yOWiekHlaSGqYY8VhLOXpsUJ1dM3Q3+ogr4fWFt+ScajoZlQ/j4208HfAu7bdCoO5xdM2rjjQhGw6DL5iwUxbPeJvTHiQTdvMMUhtqzf2XAc89jgIWwHeB+E+LRoBM3RDzPz9Wd9GgZs0xpzdvX+9lM1+242kzebCaQGLzRXG2d/j7pt3zy3Sv1Q8SUwzvhj5r/sUkn0VxpKvLqZgL5hSapZDnRLHCn6S/tykAwG3s404YfyxPddyX70bnFGy8=
+  - secure: na7TUyE6zotOquCrTW1IiHwOaQkvX/2jn46zKRUaedymxGVatjyu/HItvIYWF+QpF7K2md2QkZ0AtizqdIY0/hsSJNVxp4BSx2uQkK7sKZLXFLyu69Gd2B0qqieOjvXIB1vlRclQn+9JtHk9ztVYt9BZCuDpxC7fww5j3fQkzX1ZAuhjJnwd0ozLx4kKFD2nXkdUn9Xdk8AUNtrNvJROqvdpXRI329bsm3Z/T4mSbK7HqYHKzfw58h3UApAujf7zQiKWPQBaCsv3uio5ec+TrD7vQcSW4fIDz0DDILg3KpoDE03PnYuGKspaYvMCth1RhZ3wRu0MWU3N2pL4a8XmBDV8UgtQYBhWsUd/6teXkK7/aAh4yBgYF4f+nEEtBUxzAuJY7TA4eQM56k4US+PYUHqzpn2ztAwrad0xwVkWj0CYv3SiRAXCAyBSQDdOnCXNDGxLgbV1aYj4kQ83+G/gFFRjAZppJv76Fm7n8y3hJXE9Kk5gdGtyoWtGrgi9jE8fROE7XaYlWlF9Z/1h4VCjzP8AN7GZypqpQOZqNxBqw4YQynxKaX7xbQJ/vUeSmdyYLwzINYG0h1N+ftlf5ntRQp0bkd2DxMxsUFqjsNAlloLow17whBIj4iwFNHVralN3mdgUaBIZezz79IGaw2FCYqf0ACKEEhvY4HsiNSODsmI=
