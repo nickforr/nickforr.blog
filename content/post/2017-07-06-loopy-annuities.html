@@ -1,0 +1,107 @@
+---
+title: Loopy annuities
+author: nickforr
+date: '2017-07-06'
+slug: loopy-annuities
+categories:
+  - R
+tags:
+  - Monte Carlo
+  - Loops
+  - economic scenario generator
+description: ''
+draft: true
+topics: [R]
+---
+
+
+
+<p>I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved uppon (I’d had nagging doubts over the approach but it worked and seemed fast enough, so hadn’t bothered refactoring it until now).</p>
+<p>Background is that at work we use a lot of monte carlo simulations through economic scenario generators [<a href="https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators" class="uri">https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators</a>] and so are dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.</p>
+<p>In this specific case, I was looking to calculate projections of annuity prices, across a large number of simulated paths for interest rates.</p>
+<p>often the models built around the output from these don’t lend themselves neatly to apply / map methods (they’re typically more suited to accumulate or reduce methods).</p>
+<p>In this case, I wanted to calculate the</p>
+<p>through to keep track of some benchmarking of a couple of alternative looping approaches I was exploring</p>
+<p>Inspired by the request from (<span class="citation">@hrbrmstr</span>)[<a href="https://rud.is/b/" class="uri">https://rud.is/b/</a>] for short posts on useful topics, I thought</p>
+<p>Reference <a href="http://r.789695.n4.nabble.com/Raising-a-vector-to-the-power-of-elements-of-another-vector-td4690440.html" class="uri">http://r.789695.n4.nabble.com/Raising-a-vector-to-the-power-of-elements-of-another-vector-td4690440.html</a> (googling led me to the archive for the mailing list <a href="mailto:r-help@r-project.org">r-help@r-project.org</a>)</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## Loading tidyverse: ggplot2
+## Loading tidyverse: tibble
+## Loading tidyverse: tidyr
+## Loading tidyverse: readr
+## Loading tidyverse: purrr
+## Loading tidyverse: dplyr</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.4.1</code></pre>
+<pre><code>## Conflicts with tidy packages ----------------------------------------------</code></pre>
+<pre><code>## filter(): dplyr, stats
+## lag():    dplyr, stats</code></pre>
+<pre class="r"><code>yieldData &lt;- matrix(rnorm(250000, 0.03, 0.1), nrow = 50)
+yieldData[1, ] &lt;- 0
+
+paymentProbs &lt;- rep(0.03, 60)
+
+
+y &lt;- yieldData[3, ]
+z &lt;- drop(outer(1 + y, -seq_along(paymentProbs), &quot;^&quot;) %*% paymentProbs)
+
+zz &lt;- purrr::map_dbl(y, ~ paymentProbs %*% ((1 + .x) ^ -seq_along(paymentProbs)))
+all.equal(z, zz)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>microbenchmark::microbenchmark({
+  x_incomplete &lt;-
+    t(apply(yieldData, 1, function(y) {
+      drop(outer(1 + y, -seq_along(paymentProbs), &quot;^&quot;) %*% paymentProbs)
+    }))
+}, times = 20, unit = &quot;ms&quot;)</code></pre>
+<pre><code>## Unit: milliseconds
+##                                                                                                                                                         expr
+##  {     x_incomplete &lt;- t(apply(yieldData, 1, function(y) {         drop(outer(1 + y, -seq_along(paymentProbs), &quot;^&quot;) %*%              paymentProbs)     })) }
+##       min       lq     mean   median       uq      max neval
+##  625.2564 641.8632 690.5139 656.3467 692.5174 1017.853    20</code></pre>
+<pre class="r"><code>microbenchmark::microbenchmark({
+  x &lt;- yieldData * 0
+  for (i in 1:nrow(x)) {
+    probs &lt;-
+      if (i == 1) {
+        paymentProbs
+      } else {
+        tail(paymentProbs, -i + 1) / paymentProbs[i - 1]
+      }
+    x[i, ] &lt;-
+      drop(
+        outer(1 + yieldData[i, ], -seq_along(probs), &quot;^&quot;) %*% probs
+      )
+  }
+}, times = 20, unit = &quot;ms&quot;)</code></pre>
+<pre><code>## Unit: milliseconds
+##                                                                                                                                                                                                                                                                                                                expr
+##  {     x &lt;- yieldData * 0     for (i in 1:nrow(x)) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         x[i, ] &lt;- drop(outer(1 + yieldData[i, ], -seq_along(probs),              &quot;^&quot;) %*% probs)     } }
+##       min       lq     mean   median       uq      max neval
+##  370.6105 376.6391 404.8751 407.4107 431.2237 436.1972    20</code></pre>
+<pre class="r"><code>microbenchmark::microbenchmark({
+  xx &lt;-
+    purrr::map(
+      1:nrow(yieldData),
+      function(i) {
+        probs &lt;-
+          if (i == 1) {
+            paymentProbs
+          } else {
+            tail(paymentProbs, -i + 1) / paymentProbs[i - 1]
+          }
+        purrr::map_dbl(
+          yieldData[i, ],
+          ~ probs %*% ((1 + .x) ^ -seq_along(probs))
+        )
+      }
+    ) %&gt;%
+    purrr::flatten_dbl() %&gt;%
+    matrix(ncol = ncol(yieldData), byrow = TRUE)
+}, times = 20, unit = &quot;ms&quot;)</code></pre>
+<pre><code>## Unit: milliseconds
+##                                                                                                                                                                                                                                                                                                                                                                                       expr
+##  {     xx &lt;- purrr::map(1:nrow(yieldData), function(i) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         purrr::map_dbl(yieldData[i, ], ~probs %*% ((1 + .x)^-seq_along(probs)))     }) %&gt;% purrr::flatten_dbl() %&gt;% matrix(ncol = ncol(yieldData),          byrow = TRUE) }
+##       min       lq     mean   median       uq      max neval
+##  768.1685 782.9287 814.7953 796.1062 839.9778 926.7393    20</code></pre>
+<pre class="r"><code>all.equal(x, xx)</code></pre>
+<pre><code>## [1] TRUE</code></pre>

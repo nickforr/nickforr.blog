@@ -1,0 +1,13 @@
+---
+title: Why I learnt R
+author: nickforr
+date: '2017-07-07'
+slug: why-i-learnt-r
+categories:
+  - R
+tags: []
+description: ''
+draft: true
+topics: []
+---
+

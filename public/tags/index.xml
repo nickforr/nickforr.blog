@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on nickforr</title>
-    <link>/tags/</link>
+    <link>https://nickforr.com/tags/</link>
     <description>Recent content in Tags on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
     <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nickforr.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>R Markdown</title>
-      <link>/tags/r-markdown/</link>
+      <link>https://nickforr.com/tags/r-markdown/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r-markdown/</guid>
+      <guid>https://nickforr.com/tags/r-markdown/</guid>
       <description></description>
     </item>
     

@@ -3,45 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://nickforr.com/about/</loc>
     <lastmod>2017-05-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/testing-ci-of-blog/</loc>
+    <loc>https://nickforr.com/post/testing-ci-of-blog/</loc>
     <lastmod>2017-05-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/trying-out-blogdown/</loc>
+    <loc>https://nickforr.com/post/trying-out-blogdown/</loc>
     <lastmod>2017-05-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>https://nickforr.com/post/</loc>
     <lastmod>2017-05-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/r-markdown/</loc>
-    <lastmod>2017-05-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
+    <loc>https://nickforr.com/tags/r-markdown/</loc>
     <lastmod>2017-05-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/topics/</loc>
+    <loc>https://nickforr.com/tags/</loc>
+    <lastmod>2017-05-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/</loc>
+    <loc>https://nickforr.com/topics/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nickforr.com/</loc>
     <lastmod>2017-05-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

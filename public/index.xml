@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nickforr</title>
-    <link>/</link>
+    <link>https://nickforr.com/</link>
     <description>Recent content on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
     <lastBuildDate>Fri, 26 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nickforr.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>https://nickforr.com/about/</link>
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://nickforr.com/about/</guid>
       <description>Hugo is a static site engine written in Go.</description>
     </item>
     
     <item>
       <title>Testing CI of blog</title>
-      <link>/post/testing-ci-of-blog/</link>
+      <link>https://nickforr.com/post/testing-ci-of-blog/</link>
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/testing-ci-of-blog/</guid>
+      <guid>https://nickforr.com/post/testing-ci-of-blog/</guid>
       <description>Testing continuous integration of blog Another brief post in order to test whether the setup for CI through Travis is working properly.
 Some helpful links that I relied on to set everything up:
 https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws http://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-cloudfront-walkthrough.html
@@ -35,13 +35,13 @@ https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws http://docs.
     
     <item>
       <title>Trying out blogdown</title>
-      <link>/post/trying-out-blogdown/</link>
+      <link>https://nickforr.com/post/trying-out-blogdown/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/trying-out-blogdown/</guid>
+      <guid>https://nickforr.com/post/trying-out-blogdown/</guid>
       <description>Introduction This is just a quick check to see if I can easily add posts to this blog using blogdown.
 With a lack of imagination, I’m using the mtcars data set and ggplot (via tidyverse) to check it’s working ok (using viridis for colours).
- </description>
+## Warning: package &amp;#39;dplyr&amp;#39; was built under R version 3.4.1  </description>
     </item>
     
   </channel>
