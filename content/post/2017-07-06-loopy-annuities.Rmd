@@ -11,7 +11,8 @@ tags:
   - economic scenario generator
 description: ''
 draft: true
-topics: [R]
+topics:
+  - R
 ---
 
 I was tidying up some R code that involved some 'looping' and wondered whether the approach I'd taken could be improved uppon (I'd had nagging doubts over the approach but it worked and seemed fast enough, so hadn't bothered refactoring it until now).

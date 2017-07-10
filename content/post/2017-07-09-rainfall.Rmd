@@ -1,0 +1,83 @@
+---
+title: Rainfall
+author: nickforr
+date: '2017-07-09'
+slug: rainfall
+categories: 
+  - R
+tags: 
+  - ggplot2
+  - tidyverse
+description: ''
+draft: true
+topics:
+  - R
+---
+
+## Wetter in the West (of Scotland)?
+
+I grew up in [Fife](https://en.wikipedia.org/wiki/Fife) and now live on the
+outskirts of Glasgow.  And maybe it's just the 'lovely' July weather we're
+currently experiencing, or maybe it's just that I'm getting older and have a
+selective memory for the past, but I don't recall summers being quite so wet
+when I was growing up!
+
+I thought I'd take the opportunity to explore the data and play around with some
+visualisation...
+
+### Data from Met Office
+
+The Met Office provides [historic
+data](http://www.metoffice.gov.uk/public/weather/climate-historic/#?tab=climateHistoric)
+from weather stations across the UK and the stations at Leuchars (in Fife) and
+Paisley (just to the west of Glasgow) have data going back to the 1950s.
+
+```{r setup}
+library(tidyverse)
+library(stringr)
+library(viridis)
+library(hrbrthemes)
+```
+
+```{r fetchData}
+#Data is a bit messy in txt format (although they do have a help page on how to use the Excel 'text to columns wizard' to import the data...!)
+leucharsRawData <- 
+  readr::read_lines("http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/leucharsdata.txt", skip = 5) %>% #skip first five lines of explanations
+  stringr::str_trim() %>% #remove whitespace
+  stringr::str_split(stringr::boundary("word")) %>% #split lines into columns
+  purrr::discard(~("Provisional" %in% .x)) #Remove recent provisional results
+paisleyRawData <- 
+  readr::read_lines("http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/paisleydata.txt", skip = 5) %>%
+  stringr::str_trim() %>% #remove whitespace
+  stringr::str_split(stringr::boundary("word")) %>% #split lines into columns
+  purrr::discard(~("Provisional" %in% .x)) #Remove recent provisional results
+
+#Check that column names are the same
+stopifnot(leucharsRawData[[1]] == paisleyRawData[[1]])
+
+#Note that 2nd row of each resulting list is an unhelpful second row of column headers
+leucharsData <- 
+  tail(leucharsRawData, -2) %>%
+   purrr::map_df(~set_names(as.list(as.numeric(.x)), leucharsRawData[[1]])) %>%
+  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = "_"))) %>%
+  select(-yyyy, -mm)
+paisleyData <- 
+  tail(paisleyRawData, -2) %>%
+   purrr::map_df(~set_names(as.list(as.numeric(.x)), paisleyRawData[[1]])) %>%
+  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = "_"))) %>%
+  select(-yyyy, -mm)
+
+allData <- 
+  list(Leuchars = leucharsData, Paisley = paisleyData) %>%
+  dplyr::bind_rows(.id = "station") %>%
+  dplyr::filter(
+    dataDate >= max(min(leucharsData$dataDate), min(paisleyData$dataDate)))
+```
+
+
+
+
+
+
+
+
