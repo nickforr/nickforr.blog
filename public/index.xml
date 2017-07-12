@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 26 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nickforr.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rainfall</title>
+      <link>https://nickforr.com/post/rainfall/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://nickforr.com/post/rainfall/</guid>
+      <description>Wetter in the West (of Scotland)? I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
+I thought I’d take the opportunity to explore the data and play around with some visualisation…</description>
+    </item>
     
     <item>
       <title>About</title>

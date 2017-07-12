@@ -1,7 +1,7 @@
 ---
 title: Rainfall
 author: nickforr
-date: '2017-07-09'
+date: '2017-07-12'
 slug: rainfall
 categories: 
   - R
@@ -9,7 +9,7 @@ tags:
   - ggplot2
   - tidyverse
 description: ''
-draft: true
+draft: false
 topics:
   - R
 ---
@@ -17,8 +17,8 @@ topics:
 ## Wetter in the West (of Scotland)?
 
 I grew up in [Fife](https://en.wikipedia.org/wiki/Fife) and now live on the
-outskirts of Glasgow.  And maybe it's just the 'lovely' July weather we're
-currently experiencing, or maybe it's just that I'm getting older and have a
+outskirts of Glasgow.  And maybe it's just the 'lovely' July weather we've
+been experiencing, or maybe it's just that I'm getting older and have a
 selective memory for the past, but I don't recall summers being quite so wet
 when I was growing up!
 
@@ -32,7 +32,7 @@ data](http://www.metoffice.gov.uk/public/weather/climate-historic/#?tab=climateH
 from weather stations across the UK and the stations at Leuchars (in Fife) and
 Paisley (just to the west of Glasgow) have data going back to the 1950s.
 
-```{r setup}
+```{r setup,  message = FALSE, warning = FALSE}
 library(tidyverse)
 library(stringr)
 library(viridis)
@@ -59,13 +59,11 @@ stopifnot(leucharsRawData[[1]] == paisleyRawData[[1]])
 leucharsData <- 
   tail(leucharsRawData, -2) %>%
    purrr::map_df(~set_names(as.list(as.numeric(.x)), leucharsRawData[[1]])) %>%
-  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = "_"))) %>%
-  select(-yyyy, -mm)
+  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = "_")))
 paisleyData <- 
   tail(paisleyRawData, -2) %>%
    purrr::map_df(~set_names(as.list(as.numeric(.x)), paisleyRawData[[1]])) %>%
-  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = "_"))) %>%
-  select(-yyyy, -mm)
+  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = "_")))
 
 allData <- 
   list(Leuchars = leucharsData, Paisley = paisleyData) %>%
@@ -74,10 +72,73 @@ allData <-
     dataDate >= max(min(leucharsData$dataDate), min(paisleyData$dataDate)))
 ```
 
+The combined data goes back to `r min(allData$yyyy)` and as a first pass, it might be helpful just to compare the total rainnfall each year:
 
+```{r plotAnnualTotal}
+allData %>%
+  group_by(station, yyyy) %>%
+  dplyr::summarise(annualRainfall = sum(rain)) %>%
+  ggplot() +
+  hrbrthemes::theme_ipsum() +
+  geom_line(
+    aes(x = yyyy, y = annualRainfall, colour = forcats::as_factor(station)),
+    size = 1.5) +
+  scale_color_viridis(name = NULL, discrete = TRUE) +
+  scale_y_comma(limits = c(0, NA), breaks = scales::pretty_breaks(n = 8)) +
+  labs(
+    subtitle = "Analysis of annual rainfall, comparing east to west",
+    caption = "Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/"
+  ) +
+  xlab(NULL) + ylab("Annual rainfall (mm)") +
+  theme(legend.position = c(0.9, 0.2))
+```
 
+Well, that looks pretty clear.  I really should be expecting a wetter time in the West of Scotland (nearly twice as much now, in Paisley, as I experienced as a child in the 80s).
 
+```{r heatmap}
+allData %>%
+  ggplot() +
+  geom_tile(
+    aes(x = forcats::as_factor(as.character(mm)), 
+      y = forcats::fct_rev(forcats::as_factor(as.character(yyyy))), 
+      fill = rain)
+  ) +
+  scale_fill_viridis(name = "Rainfall (mm)") + 
+  scale_y_discrete(breaks = scales::pretty_breaks(n = 10)) +
+  facet_wrap(~station, nrow = 1) +
+  theme_minimal() +
+  xlab("Months") + ylab("Years") +
+  labs(
+    subtitle = "Analysis of monthly rainfall over time, comparing East to West",
+    caption = "Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/"
+  )
+  
+```
 
+Overall it looks wetter in Paisley, predominantly based on the Autumn and Winter months.  Hard to tell much about the summer months though.
 
+If we filter the data to only look at June, July, and August...
+
+```{r summerHeatmap}
+allData %>%
+  filter(mm %in% c(6, 7, 8)) %>%
+  dplyr::mutate(yyyy = forcats::fct_rev(forcats::as_factor(as.character(yyyy)))) %>%
+  ggplot() +
+  geom_tile(
+    aes(x = forcats::as_factor(as.character(mm)), 
+      y = yyyy, fill = rain)) +
+  scale_fill_viridis(name = "Rainfall (mm)") + 
+  scale_y_discrete(breaks = scales::pretty_breaks(n = 10)) +
+  facet_wrap(~station, nrow = 1) +
+  theme_minimal() +
+  xlab("Months") + ylab("Years") +
+  labs(
+    subtitle = "Analysis of summer rainfall over time, comparing East to West",
+    caption = "Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/"
+  )
+  
+```
+
+Whilst there doesn't appear to be too much difference over the last few years in July, it's still a lot wetter over in the West now than it was when I was growing up! 
 
 

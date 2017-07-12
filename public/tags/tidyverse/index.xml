@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidyverse on nickforr</title>
+    <link>https://nickforr.com/tags/tidyverse/</link>
+    <description>Recent content in Tidyverse on nickforr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nickforr.com/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rainfall</title>
+      <link>https://nickforr.com/post/rainfall/</link>
+      <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://nickforr.com/post/rainfall/</guid>
+      <description>Wetter in the West (of Scotland)? I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
+I thought I’d take the opportunity to explore the data and play around with some visualisation…</description>
+    </item>
+    
+  </channel>
+</rss>
