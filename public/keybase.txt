@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/nickforr
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://nickforr.com
+  * I am nickforr (https://keybase.io/nickforr) on keybase.
+  * I have a public key ASCIowYfbqAlvmmfsvlkZh5QB312wn2nlXaWd5U5aKr-CAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012088a3061f6ea025be699fb2f964661e50077d76c27da795769677953968aafe080a",
+      "host": "keybase.io",
+      "kid": "012088a3061f6ea025be699fb2f964661e50077d76c27da795769677953968aafe080a",
+      "uid": "61ab58fcdcda36e76bebf02ee575d619",
+      "username": "nickforr"
+    },
+    "merkle_root": {
+      "ctime": 1509139420,
+      "hash": "70694b21432700241c24208d9f49a6008b5b980ad495af4ecc1b432b9a933f146c1407b4f4bfd674ff35f0da485c3edf8c5aa2aaf6283bc0ac3707153a03ab07",
+      "hash_meta": "84fe771358ef0fa6300cc2fb525e77189b321d334ca7af99559fc1794bd8a508",
+      "seqno": 1638924
+    },
+    "service": {
+      "hostname": "nickforr.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.34"
+  },
+  "ctime": 1509139511,
+  "expire_in": 504576000,
+  "prev": "302bc9cc567afee5db44f8ae354a552800d0966d83b2955a37f62640075e6db2",
+  "seqno": 9,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgiKMGH26gJb5pn7L5ZGYeUAd9dsJ9p5V2lneVOWiq/ggKp3BheWxvYWTFA0R7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwODhhMzA2MWY2ZWEwMjViZTY5OWZiMmY5NjQ2NjFlNTAwNzdkNzZjMjdkYTc5NTc2OTY3Nzk1Mzk2OGFhZmUwODBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwODhhMzA2MWY2ZWEwMjViZTY5OWZiMmY5NjQ2NjFlNTAwNzdkNzZjMjdkYTc5NTc2OTY3Nzk1Mzk2OGFhZmUwODBhIiwidWlkIjoiNjFhYjU4ZmNkY2RhMzZlNzZiZWJmMDJlZTU3NWQ2MTkiLCJ1c2VybmFtZSI6Im5pY2tmb3JyIn0sIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNTA5MTM5NDIwLCJoYXNoIjoiNzA2OTRiMjE0MzI3MDAyNDFjMjQyMDhkOWY0OWE2MDA4YjViOTgwYWQ0OTVhZjRlY2MxYjQzMmI5YTkzM2YxNDZjMTQwN2I0ZjRiZmQ2NzRmZjM1ZjBkYTQ4NWMzZWRmOGM1YWEyYWFmNjI4M2JjMGFjMzcwNzE1M2EwM2FiMDciLCJoYXNoX21ldGEiOiI4NGZlNzcxMzU4ZWYwZmE2MzAwY2MyZmI1MjVlNzcxODliMzIxZDMzNGNhN2FmOTk1NTlmYzE3OTRiZDhhNTA4Iiwic2Vxbm8iOjE2Mzg5MjR9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoibmlja2ZvcnIuY29tIiwicHJvdG9jb2wiOiJodHRwczoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMzQifSwiY3RpbWUiOjE1MDkxMzk1MTEsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJwcmV2IjoiMzAyYmM5Y2M1NjdhZmVlNWRiNDRmOGFlMzU0YTU1MjgwMGQwOTY2ZDgzYjI5NTVhMzdmNjI2NDAwNzVlNmRiMiIsInNlcW5vIjo5LCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQAt6U4/K5hyRsv4NQ8h9SlEqTrg3GIp+P92VClU/rI2HLMwQwkSn0hsc9wit2FsdPVNgHDNDOY2gs4pxyo0rCQaoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCCyZ57cuc7LkDjC/WGbQurDiJL5VzsxiP4gDYjX8NMWNKN0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/nickforr
+
+==================================================================

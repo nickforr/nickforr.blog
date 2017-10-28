@@ -21,13 +21,13 @@
   <!--<![endif]-->
 
   <!--[if lte IE 8]>
-  <link rel="stylesheet" href="https://nickforr.com/css/side-menu-old-ie.css">
+  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="https://nickforr.com/css/side-menu.css">
+  <link rel="stylesheet" href="/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="https://nickforr.com/css/blackburn.css">
+  <link rel="stylesheet" href="/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,7 +44,7 @@
   <script>hljs.initHighlightingOnLoad();</script>
   
 
-  <link rel="shortcut icon" href="https://nickforr.com/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
 
   
   
@@ -63,7 +63,7 @@
 <div id="menu">
 
   
-  <a class="pure-menu-heading brand" href="https://nickforr.com/">nickforr</a>
+  <a class="pure-menu-heading brand" href="/">nickforr</a>
 
 
   <div class="pure-menu">
@@ -71,19 +71,19 @@
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="https://nickforr.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="https://nickforr.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
+          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="https://nickforr.com/"><i class='fa fa-home fa-fw'></i>Home</a>
+          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
       
         </li>
       
@@ -222,7 +222,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://nickforr.com/topics/r">R</a>
+      <a class="post-taxonomy-topic" href="/topics/r">R</a>
     
   </div>
   
@@ -234,9 +234,9 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://nickforr.com/tags/ggplot2">ggplot2</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/ggplot2">ggplot2</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://nickforr.com/tags/tidyverse">tidyverse</a>
+      <a class="post-taxonomy-tag" href="/tags/tidyverse">tidyverse</a>
     
   </div>
   
@@ -302,7 +302,7 @@ allData &lt;-
   ) +
   xlab(NULL) + ylab(&quot;Annual rainfall (mm)&quot;) +
   theme(legend.position = c(0.9, 0.2))</code></pre>
-<p><img src="https://nickforr.com/post/2017-07-09-rainfall_files/figure-html/plotAnnualTotal-1.png" width="672" /></p>
+<p><img src="/post/2017-07-09-rainfall_files/figure-html/plotAnnualTotal-1.png" width="672" /></p>
 <p>Well, that looks pretty clear. I really should be expecting a wetter time in the West of Scotland (nearly twice as much now, in Paisley, as I experienced as a child in the 80s).</p>
 <pre class="r"><code>allData %&gt;%
   ggplot() +
@@ -320,7 +320,7 @@ allData &lt;-
     subtitle = &quot;Analysis of monthly rainfall over time, comparing East to West&quot;,
     caption = &quot;Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/&quot;
   )</code></pre>
-<p><img src="https://nickforr.com/post/2017-07-09-rainfall_files/figure-html/heatmap-1.png" width="672" /></p>
+<p><img src="/post/2017-07-09-rainfall_files/figure-html/heatmap-1.png" width="672" /></p>
 <p>Overall it looks wetter in Paisley, predominantly based on the Autumn and Winter months. Hard to tell much about the summer months though.</p>
 <p>If we filter the data to only look at June, July, and August…</p>
 <pre class="r"><code>allData %&gt;%
@@ -339,7 +339,7 @@ allData &lt;-
     subtitle = &quot;Analysis of summer rainfall over time, comparing East to West&quot;,
     caption = &quot;Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/&quot;
   )</code></pre>
-<p><img src="https://nickforr.com/post/2017-07-09-rainfall_files/figure-html/summerHeatmap-1.png" width="672" /></p>
+<p><img src="/post/2017-07-09-rainfall_files/figure-html/summerHeatmap-1.png" width="672" /></p>
 <p>Whilst there doesn’t appear to be too much difference over the last few years in July, it’s still a lot wetter over in the West now than it was when I was growing up!</p>
 </div>
 </div>
@@ -349,13 +349,13 @@ allData &lt;-
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://nickforr.com/post/testing-ci-of-blog/"><i class="fa fa-chevron-left"></i></a>
+    <a href="/post/why-i-learnt-r/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://nickforr.com/post/testing-ci-of-blog/">Testing CI of blog</a>
+      <a href="/post/why-i-learnt-r/">Why I learnt R</a>
     </nav>
     
   </div>
@@ -364,8 +364,14 @@ allData &lt;-
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="/post/trying-out-rtweet/">Trying out rtweet</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="/post/trying-out-rtweet/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
@@ -378,7 +384,7 @@ allData &lt;-
 
 </div>
 </div>
-<script src="https://nickforr.com/js/ui.js"></script>
+<script src="/js/ui.js"></script>
 
 
 
