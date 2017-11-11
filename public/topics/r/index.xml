@@ -2,52 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R on nickforr</title>
-    <link>/topics/r/</link>
+    <link>https://nickforr.com/topics/r/</link>
     <description>Recent content in R on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 24 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/topics/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nickforr.com/topics/r/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Trying out rtweet</title>
-      <link>/post/trying-out-rtweet/</link>
-      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/trying-out-rtweet/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Rainfall</title>
-      <link>/post/rainfall/</link>
+      <link>https://nickforr.com/post/rainfall/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/rainfall/</guid>
+      <guid>https://nickforr.com/post/rainfall/</guid>
       <description>Wetter in the West (of Scotland)? I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
 I thought I’d take the opportunity to explore the data and play around with some visualisation…</description>
-    </item>
-    
-    <item>
-      <title>Why I learnt R</title>
-      <link>/post/why-i-learnt-r/</link>
-      <pubDate>Fri, 07 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/why-i-learnt-r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Loopy annuities</title>
-      <link>/post/loopy-annuities/</link>
-      <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/loopy-annuities/</guid>
-      <description>I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved uppon (I’d had nagging doubts over the approach but it worked and seemed fast enough, so hadn’t bothered refactoring it until now).
-Background is that at work we use a lot of monte carlo simulations through economic scenario generators [https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators] and so are dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.</description>
     </item>
     
   </channel>

@@ -32,7 +32,6 @@ topics:
 ## Loading tidyverse: readr
 ## Loading tidyverse: purrr
 ## Loading tidyverse: dplyr</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.4.1</code></pre>
 <pre><code>## Conflicts with tidy packages ----------------------------------------------</code></pre>
 <pre><code>## filter(): dplyr, stats
 ## lag():    dplyr, stats</code></pre>
@@ -57,8 +56,8 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                         expr
 ##  {     x_incomplete &lt;- t(apply(yieldData, 1, function(y) {         drop(outer(1 + y, -seq_along(paymentProbs), &quot;^&quot;) %*%              paymentProbs)     })) }
-##      min       lq    mean  median       uq      max neval
-##  638.165 646.4296 681.634 654.146 698.9033 895.9153    20</code></pre>
+##       min       lq     mean   median       uq      max neval
+##  690.2744 731.5849 766.4156 773.4272 793.0638 841.2133    20</code></pre>
 <pre class="r"><code>microbenchmark::microbenchmark({
   x &lt;- yieldData * 0
   for (i in 1:nrow(x)) {
@@ -77,8 +76,8 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                                                                                                                                                                                expr
 ##  {     x &lt;- yieldData * 0     for (i in 1:nrow(x)) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         x[i, ] &lt;- drop(outer(1 + yieldData[i, ], -seq_along(probs),              &quot;^&quot;) %*% probs)     } }
-##       min       lq     mean   median       uq      max neval
-##  383.7155 395.1532 455.2577 455.1877 500.5438 554.7346    20</code></pre>
+##       min       lq     mean median       uq      max neval
+##  400.9066 442.0203 474.8587 459.22 510.7008 576.4835    20</code></pre>
 <pre class="r"><code>microbenchmark::microbenchmark({
   xx &lt;-
     purrr::map(
@@ -102,7 +101,7 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                                                                                                                                                                                                                                                       expr
 ##  {     xx &lt;- purrr::map(1:nrow(yieldData), function(i) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         purrr::map_dbl(yieldData[i, ], ~probs %*% ((1 + .x)^-seq_along(probs)))     }) %&gt;% purrr::flatten_dbl() %&gt;% matrix(ncol = ncol(yieldData),          byrow = TRUE) }
-##       min      lq    mean   median       uq      max neval
-##  804.9208 991.663 1104.55 1057.097 1197.283 1591.764    20</code></pre>
+##      min       lq     mean  median       uq      max neval
+##  844.741 887.8677 963.6773 941.561 1033.549 1119.796    20</code></pre>
 <pre class="r"><code>all.equal(x, xx)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
