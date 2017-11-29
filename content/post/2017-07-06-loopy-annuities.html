@@ -26,15 +26,14 @@ topics:
 <p>Inspired by the request from (<span class="citation">@hrbrmstr</span>)[<a href="https://rud.is/b/" class="uri">https://rud.is/b/</a>] for short posts on useful topics, I thought</p>
 <p>Reference <a href="http://r.789695.n4.nabble.com/Raising-a-vector-to-the-power-of-elements-of-another-vector-td4690440.html" class="uri">http://r.789695.n4.nabble.com/Raising-a-vector-to-the-power-of-elements-of-another-vector-td4690440.html</a> (googling led me to the archive for the mailing list <a href="mailto:r-help@r-project.org">r-help@r-project.org</a>)</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr</code></pre>
-<pre><code>## Conflicts with tidy packages ----------------------------------------------</code></pre>
-<pre><code>## filter(): dplyr, stats
-## lag():    dplyr, stats</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+## ✔ tibble  1.3.4     ✔ dplyr   0.7.4
+## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
+## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>yieldData &lt;- matrix(rnorm(250000, 0.03, 0.1), nrow = 50)
 yieldData[1, ] &lt;- 0
 
@@ -56,8 +55,8 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                         expr
 ##  {     x_incomplete &lt;- t(apply(yieldData, 1, function(y) {         drop(outer(1 + y, -seq_along(paymentProbs), &quot;^&quot;) %*%              paymentProbs)     })) }
-##       min       lq     mean   median       uq      max neval
-##  690.2744 731.5849 766.4156 773.4272 793.0638 841.2133    20</code></pre>
+##       min       lq    mean median       uq      max neval
+##  1476.728 1484.863 1556.77 1502.3 1570.484 1994.069    20</code></pre>
 <pre class="r"><code>microbenchmark::microbenchmark({
   x &lt;- yieldData * 0
   for (i in 1:nrow(x)) {
@@ -76,8 +75,8 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                                                                                                                                                                                expr
 ##  {     x &lt;- yieldData * 0     for (i in 1:nrow(x)) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         x[i, ] &lt;- drop(outer(1 + yieldData[i, ], -seq_along(probs),              &quot;^&quot;) %*% probs)     } }
-##       min       lq     mean median       uq      max neval
-##  400.9066 442.0203 474.8587 459.22 510.7008 576.4835    20</code></pre>
+##       min       lq     mean   median       uq      max neval
+##  834.7593 850.7636 934.7153 979.5663 994.2418 1013.313    20</code></pre>
 <pre class="r"><code>microbenchmark::microbenchmark({
   xx &lt;-
     purrr::map(
@@ -101,7 +100,7 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                                                                                                                                                                                                                                                       expr
 ##  {     xx &lt;- purrr::map(1:nrow(yieldData), function(i) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         purrr::map_dbl(yieldData[i, ], ~probs %*% ((1 + .x)^-seq_along(probs)))     }) %&gt;% purrr::flatten_dbl() %&gt;% matrix(ncol = ncol(yieldData),          byrow = TRUE) }
-##      min       lq     mean  median       uq      max neval
-##  844.741 887.8677 963.6773 941.561 1033.549 1119.796    20</code></pre>
+##       min       lq     mean  median       uq      max neval
+##  1461.276 1493.032 1562.639 1523.95 1642.193 1724.553    20</code></pre>
 <pre class="r"><code>all.equal(x, xx)</code></pre>
 <pre><code>## [1] TRUE</code></pre>

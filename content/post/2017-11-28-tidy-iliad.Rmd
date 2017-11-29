@@ -1,0 +1,34 @@
+---
+title: Tidy Iliad
+author: nickforr
+date: '2017-10-24'
+slug: tidy-iliad
+categories: 
+  - R
+tags: 
+  - sentiment
+description: ''
+draft: true
+topics:
+  - R
+---
+
+Inspired by yet another @hrbrmstr project, I thought I'd have a go at replicating his approach for assessing the sentiment of a book, but using Homer's Iliad.
+
+```{r}
+library(hrbrthemes)
+library(stringi)
+library(tidytext)
+library(tidyverse)
+```
+
+I've also used Project Gutenberg to access the text. I've removed the introductory text and just saved the file at the start of Book 1.
+
+```{r}
+iliad_txt <- stri_read_lines(file.path(getwd(), "iliad.txt"))
+```
+
+
+
+
+

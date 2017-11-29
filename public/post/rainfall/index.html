@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.21" />
+  <meta name="generator" content="Hugo 0.31.1" />
 
   <title>Rainfall &middot; nickforr</title>
 
@@ -274,10 +274,8 @@ stopifnot(leucharsRawData[[1]] == paisleyRawData[[1]])
 leucharsData &lt;- 
   tail(leucharsRawData, -2) %&gt;%
    purrr::map_df(~set_names(as.list(as.numeric(.x)), leucharsRawData[[1]])) %&gt;%
-  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = &quot;_&quot;)))</code></pre>
-<pre><code>## Warning in as.POSIXlt.POSIXct(x, tz): unknown timezone &#39;zone/tz/2017c.1.0/
-## zoneinfo/Europe/London&#39;</code></pre>
-<pre class="r"><code>paisleyData &lt;- 
+  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = &quot;_&quot;)))
+paisleyData &lt;- 
   tail(paisleyRawData, -2) %&gt;%
    purrr::map_df(~set_names(as.list(as.numeric(.x)), paisleyRawData[[1]])) %&gt;%
   dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = &quot;_&quot;)))

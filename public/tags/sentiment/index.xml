@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sentiment on nickforr</title>
+    <link>/tags/sentiment/</link>
+    <description>Recent content in Sentiment on nickforr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Tue, 24 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/sentiment/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tidy Iliad</title>
+      <link>/post/tidy-iliad/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/tidy-iliad/</guid>
+      <description>Inspired by yet another @hrbrmstr project, I thought I’d have a go at replicating his approach for assessing the sentiment of a book, but using Homer’s Iliad.</description>
+    </item>
+    
+  </channel>
+</rss>
