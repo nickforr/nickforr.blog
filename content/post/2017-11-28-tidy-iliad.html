@@ -15,18 +15,37 @@ topics:
 
 
 
-<p>Inspired by yet another <span class="citation">@hrbrmstr</span> project, I thought I’d have a go at replicating his approach for assessing the sentiment of a book, but using Homer’s Iliad.</p>
-<pre class="r"><code>library(hrbrthemes)
-library(stringi)
+<p>Inspired by yet another <span class="citation">@hrbrmstr</span> project, I thought I’d have a go at replicating his approach for assessing the sentiment of a book, but using Homer’s Iliad. (I know, it’s not Christmas-y but hey ho ho ho).</p>
+<pre class="r"><code>library(hrbrthemes)</code></pre>
+<pre><code>## NOTE: Either Arial Narrow or Roboto Condensed fonts are *required* to use these themes.</code></pre>
+<pre><code>##       Please use hrbrthemes::import_roboto_condensed() to install Roboto Condensed and</code></pre>
+<pre><code>##       if Arial Narrow is not on your system, please see http://bit.ly/arialnarrow</code></pre>
+<pre class="r"><code>library(stringi)
 library(tidytext)
 library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
-## ✔ tibble  1.3.4     ✔ dplyr   0.7.4
-## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
-## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
+## ✔ tidyr   0.8.0     ✔ stringr 1.3.0
+## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(gutenbergr)</code></pre>
 <p>I’ve also used Project Gutenberg to access the text. I’ve removed the introductory text and just saved the file at the start of Book 1.</p>
+<pre class="r"><code>gutenberg_works(author == &quot;Homer&quot;)</code></pre>
+<pre><code>## # A tibble: 10 x 8
+##    gutenberg_id title   author gutenberg_autho… language gutenberg_booksh…
+##           &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;            
+##  1         1727 &quot;The O… Homer               705 en       Harvard Classics…
+##  2         1728 The Od… Homer               705 en       Harvard Classics…
+##  3         2199 The Il… Homer               705 en       Classical Antiqu…
+##  4         3160 The Od… Homer               705 en       Harvard Classics…
+##  5        16452 &quot;The I… Homer               705 en       Classical Antiqu…
+##  6        22382 The Il… Homer               705 en       Classical Antiqu…
+##  7        24269 The Od… Homer               705 en       Classical Antiqu…
+##  8        24856 &quot;Odyss… Homer               705 en       &lt;NA&gt;             
+##  9        48895 &quot;The O… Homer               705 en       &lt;NA&gt;             
+## 10        51355 &quot;The I… Homer               705 en       &lt;NA&gt;             
+## # ... with 2 more variables: rights &lt;chr&gt;, has_text &lt;lgl&gt;</code></pre>
 <pre class="r"><code>iliad_txt &lt;- stri_read_lines(file.path(getwd(), &quot;iliad.txt&quot;))</code></pre>

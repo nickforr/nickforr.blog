@@ -1,7 +1,7 @@
 baseurl = "https://nickforr.com/"
 languageCode = "en-us"
 title = "nickforr"
-theme = "blackburn"
+theme = "hugo-lithium-theme"
 author = "Nick Forrester"
 copyright = "&copy; 2017. All rights reserved."
 canonifyurls = true
