@@ -26,8 +26,8 @@ library(gutenbergr)
 I've also used Project Gutenberg to access the text. I've removed the introductory text and just saved the file at the start of Book 1.
 
 ```{r}
-gutenberg_works(author == "Homer")
-iliad_txt <- stri_read_lines(file.path(getwd(), "iliad.txt"))
+#gutenberg_works(author == "Homer")
+#iliad_txt <- stri_read_lines(file.path(getwd(), "iliad.txt"))
 ```
 
 

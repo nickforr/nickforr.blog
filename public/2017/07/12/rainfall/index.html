@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Rainfall</title>
+  <meta property="og:title" content="Rainfall" />
+  <meta name="twitter:title" content="Rainfall" />
+  <meta name="description" content="Wetter in the West (of Scotland)? I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
+I thought I’d take the opportunity to explore the data and play around with some visualisation…">
+  <meta property="og:description" content="Wetter in the West (of Scotland)? I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
+I thought I’d take the opportunity to explore the data and play around with some visualisation…">
+  <meta name="twitter:description" content="Wetter in the West (of Scotland)? I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting …">
+  <meta name="author" content="Nick Forrester"/>
+  <meta property="og:image" content="https://nickforr.com/img/main.jpeg" />
+  <meta name="twitter:image" content="https://nickforr.com/img/main.jpeg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@nickforr" />
+  <meta name="twitter:creator" content="@nickforr" />
+  <meta property="og:url" content="https://nickforr.com/2017/07/12/rainfall/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="nickforr" />
+
+  <meta name="generator" content="Hugo 0.40.3" />
+  <link rel="canonical" href="https://nickforr.com/2017/07/12/rainfall/" />
+  <link rel="alternate" href="https://nickforr.com/index.xml" type="application/rss+xml" title="nickforr">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://nickforr.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://nickforr.com/css/highlight.min.css" /><link rel="stylesheet" href="https://nickforr.com/css/codeblock.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-119465042-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://nickforr.com/">nickforr</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="../../../../">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="../../../../page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="../../../../tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="nickforr" href="https://nickforr.com/">
+            <img class="avatar-img" src="https://nickforr.com/img/main.jpeg" alt="nickforr" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Rainfall</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on July 12, 2017
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (603 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <div id="wetter-in-the-west-of-scotland" class="section level2">
+<h2>Wetter in the West (of Scotland)?</h2>
+<p>I grew up in <a href="https://en.wikipedia.org/wiki/Fife">Fife</a> and now live on the
+outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve
+been experiencing, or maybe it’s just that I’m getting older and have a
+selective memory for the past, but I don’t recall summers being quite so wet
+when I was growing up!</p>
+<p>I thought I’d take the opportunity to explore the data and play around with some
+visualisation…</p>
+<div id="data-from-met-office" class="section level3">
+<h3>Data from Met Office</h3>
+<p>The Met Office provides <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/#?tab=climateHistoric">historic
+data</a>
+from weather stations across the UK and the stations at Leuchars (in Fife) and
+Paisley (just to the west of Glasgow) have data going back to the 1950s.</p>
+<pre class="r"><code>library(tidyverse)
+library(stringr)
+library(viridis)
+library(hrbrthemes)</code></pre>
+<pre class="r"><code>#Data is a bit messy in txt format (although they do have a help page on how to use the Excel &#39;text to columns wizard&#39; to import the data...!)
+leucharsRawData &lt;- 
+  readr::read_lines(&quot;http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/leucharsdata.txt&quot;, skip = 5) %&gt;% #skip first five lines of explanations
+  stringr::str_trim() %&gt;% #remove whitespace
+  stringr::str_split(stringr::boundary(&quot;word&quot;)) %&gt;% #split lines into columns
+  purrr::discard(~(&quot;Provisional&quot; %in% .x)) #Remove recent provisional results
+paisleyRawData &lt;- 
+  readr::read_lines(&quot;http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/paisleydata.txt&quot;, skip = 5) %&gt;%
+  stringr::str_trim() %&gt;% #remove whitespace
+  stringr::str_split(stringr::boundary(&quot;word&quot;)) %&gt;% #split lines into columns
+  purrr::discard(~(&quot;Provisional&quot; %in% .x)) #Remove recent provisional results
+
+#Check that column names are the same
+stopifnot(leucharsRawData[[1]] == paisleyRawData[[1]])
+
+#Note that 2nd row of each resulting list is an unhelpful second row of column headers
+leucharsData &lt;- 
+  tail(leucharsRawData, -2) %&gt;%
+   purrr::map_df(~set_names(as.list(as.numeric(.x)), leucharsRawData[[1]])) %&gt;%
+  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = &quot;_&quot;)))
+paisleyData &lt;- 
+  tail(paisleyRawData, -2) %&gt;%
+   purrr::map_df(~set_names(as.list(as.numeric(.x)), paisleyRawData[[1]])) %&gt;%
+  dplyr::mutate(dataDate = lubridate::dmy(paste(01, mm, yyyy, sep = &quot;_&quot;)))
+
+allData &lt;- 
+  list(Leuchars = leucharsData, Paisley = paisleyData) %&gt;%
+  dplyr::bind_rows(.id = &quot;station&quot;) %&gt;%
+  dplyr::filter(
+    dataDate &gt;= max(min(leucharsData$dataDate), min(paisleyData$dataDate)))</code></pre>
+<p>The combined data goes back to 1959 and as a first pass, it might be helpful just to compare the total rainnfall each year:</p>
+<pre class="r"><code>allData %&gt;%
+  group_by(station, yyyy) %&gt;%
+  dplyr::summarise(annualRainfall = sum(rain)) %&gt;%
+  ggplot() +
+  hrbrthemes::theme_ipsum() +
+  geom_line(
+    aes(x = yyyy, y = annualRainfall, colour = forcats::as_factor(station)),
+    size = 1.5) +
+  scale_color_viridis(name = NULL, discrete = TRUE) +
+  scale_y_comma(limits = c(0, NA), breaks = scales::pretty_breaks(n = 8)) +
+  labs(
+    subtitle = &quot;Analysis of annual rainfall, comparing east to west&quot;,
+    caption = &quot;Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/&quot;
+  ) +
+  xlab(NULL) + ylab(&quot;Annual rainfall (mm)&quot;) +
+  theme(legend.position = c(0.9, 0.2))</code></pre>
+<p><img src="../../../../post/2017-07-09-rainfall_files/figure-html/plotAnnualTotal-1.png" width="672" /></p>
+<p>Well, that looks pretty clear. I really should be expecting a wetter time in the West of Scotland (nearly twice as much now, in Paisley, as I experienced as a child in the 80s).</p>
+<pre class="r"><code>allData %&gt;%
+  ggplot() +
+  geom_tile(
+    aes(x = forcats::as_factor(as.character(mm)), 
+      y = forcats::fct_rev(forcats::as_factor(as.character(yyyy))), 
+      fill = rain)
+  ) +
+  scale_fill_viridis(name = &quot;Rainfall (mm)&quot;) + 
+  scale_y_discrete(breaks = scales::pretty_breaks(n = 10)) +
+  facet_wrap(~station, nrow = 1) +
+  theme_minimal() +
+  xlab(&quot;Months&quot;) + ylab(&quot;Years&quot;) +
+  labs(
+    subtitle = &quot;Analysis of monthly rainfall over time, comparing East to West&quot;,
+    caption = &quot;Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/&quot;
+  )</code></pre>
+<p><img src="../../../../post/2017-07-09-rainfall_files/figure-html/heatmap-1.png" width="672" /></p>
+<p>Overall it looks wetter in Paisley, predominantly based on the Autumn and Winter months. Hard to tell much about the summer months though.</p>
+<p>If we filter the data to only look at June, July, and August…</p>
+<pre class="r"><code>allData %&gt;%
+  filter(mm %in% c(6, 7, 8)) %&gt;%
+  dplyr::mutate(yyyy = forcats::fct_rev(forcats::as_factor(as.character(yyyy)))) %&gt;%
+  ggplot() +
+  geom_tile(
+    aes(x = forcats::as_factor(as.character(mm)), 
+      y = yyyy, fill = rain)) +
+  scale_fill_viridis(name = &quot;Rainfall (mm)&quot;) + 
+  scale_y_discrete(breaks = scales::pretty_breaks(n = 10)) +
+  facet_wrap(~station, nrow = 1) +
+  theme_minimal() +
+  xlab(&quot;Months&quot;) + ylab(&quot;Years&quot;) +
+  labs(
+    subtitle = &quot;Analysis of summer rainfall over time, comparing East to West&quot;,
+    caption = &quot;Data sourced from http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/&quot;
+  )</code></pre>
+<p><img src="../../../../post/2017-07-09-rainfall_files/figure-html/summerHeatmap-1.png" width="672" /></p>
+<p>Whilst there doesn’t appear to be too much difference over the last few years in July, it’s still a lot wetter over in the West now than it was when I was growing up!</p>
+</div>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://nickforr.com//tags/ggplot2/">ggplot2</a>&nbsp;
+            
+              <a href="https://nickforr.com//tags/tidyverse/">tidyverse</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <ul class="list-inline footer-links">
+                
+
+
+<li>
+    <a href="//twitter.com/share?url=https%3a%2f%2fnickforr.com%2f2017%2f07%2f12%2frainfall%2f&amp;text=Rainfall&amp;via=nickforr"
+       target="_blank" alt="" title="Share on Twitter">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//plus.google.com/share?url=https%3a%2f%2fnickforr.com%2f2017%2f07%2f12%2frainfall%2f" target="_blank" title="Share on Google Plus">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fnickforr.com%2f2017%2f07%2f12%2frainfall%2f" target="_blank" title="Share on Facebook">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//reddit.com/submit?url=https%3a%2f%2fnickforr.com%2f2017%2f07%2f12%2frainfall%2f&amp;title=Rainfall" target="_blank" title="Share on Reddit">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fnickforr.com%2f2017%2f07%2f12%2frainfall%2f&amp;title=Rainfall" target="_blank"
+       title="Share on LinkedIn">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fnickforr.com%2f2017%2f07%2f12%2frainfall%2f&amp;title=Rainfall" target="_blank"
+       title="Share on StumbleUpon">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stumbleupon fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fnickforr.com%2f2017%2f07%2f12%2frainfall%2f&amp;description=Rainfall" target="_blank"
+       title="Share on Pinterest">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+              </ul>
+            </section>
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://nickforr.com/2017/05/26/testing-ci-of-blog/" data-toggle="tooltip" data-placement="top" title="Testing CI of blog">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/nickforr" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/nickforr" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5812231/nick-f" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="https://nickforr.com/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="nickforr.com">Nick Forrester</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2017
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://nickforr.com/">nickforr</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.40.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://nickforr.com/js/main.js"></script>
+<script src="https://nickforr.com/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="https://nickforr.com/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

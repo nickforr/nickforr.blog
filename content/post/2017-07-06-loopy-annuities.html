@@ -57,7 +57,7 @@ all.equal(z, zz)</code></pre>
 ##                                                                                                                                                         expr
 ##  {     x_incomplete &lt;- t(apply(yieldData, 1, function(y) {         drop(outer(1 + y, -seq_along(paymentProbs), &quot;^&quot;) %*%              paymentProbs)     })) }
 ##       min       lq     mean   median       uq      max neval
-##  656.5961 694.4769 772.1113 746.7439 798.4513 1139.236    20</code></pre>
+##  631.7556 652.4565 699.5729 700.5094 722.4982 844.9297    20</code></pre>
 <pre class="r"><code>microbenchmark::microbenchmark({
   x &lt;- yieldData * 0
   for (i in 1:nrow(x)) {
@@ -76,8 +76,8 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                                                                                                                                                                                expr
 ##  {     x &lt;- yieldData * 0     for (i in 1:nrow(x)) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         x[i, ] &lt;- drop(outer(1 + yieldData[i, ], -seq_along(probs),              &quot;^&quot;) %*% probs)     } }
-##       min       lq     mean   median       uq      max neval
-##  450.7224 469.9338 594.0023 553.3278 647.2701 1037.418    20</code></pre>
+##      min       lq     mean   median       uq      max neval
+##  416.715 440.9397 476.2268 455.9162 503.8598 619.7329    20</code></pre>
 <pre class="r"><code>microbenchmark::microbenchmark({
   xx &lt;-
     purrr::map(
@@ -101,7 +101,7 @@ all.equal(z, zz)</code></pre>
 <pre><code>## Unit: milliseconds
 ##                                                                                                                                                                                                                                                                                                                                                                                       expr
 ##  {     xx &lt;- purrr::map(1:nrow(yieldData), function(i) {         probs &lt;- if (i == 1) {             paymentProbs         }         else {             tail(paymentProbs, -i + 1)/paymentProbs[i - 1]         }         purrr::map_dbl(yieldData[i, ], ~probs %*% ((1 + .x)^-seq_along(probs)))     }) %&gt;% purrr::flatten_dbl() %&gt;% matrix(ncol = ncol(yieldData),          byrow = TRUE) }
-##       min       lq     mean   median       uq      max neval
-##  1020.254 1035.771 1061.487 1053.776 1082.502 1118.813    20</code></pre>
+##       min     lq     mean   median       uq      max neval
+##  1159.994 1355.2 2987.617 2029.563 3817.729 11289.22    20</code></pre>
 <pre class="r"><code>all.equal(x, xx)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
