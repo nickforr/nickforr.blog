@@ -3,111 +3,94 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/2017/10/24/tidy-iliad/</loc>
-    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
+    <loc>https://nickforr.com/2018/05/20/neo-generalism/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/07/12/rainfall/</loc>
+    <loc>https://nickforr.com/2017/07/12/rainfall/</loc>
     <lastmod>2017-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/07/06/loopy-annuities/</loc>
-    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2017/05/26/testing-ci-of-blog/</loc>
+    <loc>https://nickforr.com/2017/05/26/testing-ci-of-blog/</loc>
     <lastmod>2017-05-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2017/05/24/trying-out-blogdown/</loc>
+    <loc>https://nickforr.com/2017/05/24/trying-out-blogdown/</loc>
     <lastmod>2017-05-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/x_index/</loc>
+    <loc>https://nickforr.com/x_index/</loc>
   </url>
   
   <url>
-    <loc>/page/about/</loc>
+    <loc>https://nickforr.com/page/about/</loc>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://nickforr.com/tags/blogdown/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/economic-scenario-generator/</loc>
-    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
+    <loc>https://nickforr.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/ggplot2/</loc>
+    <loc>https://nickforr.com/tags/ggplot2/</loc>
     <lastmod>2017-07-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/loops/</loc>
-    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
+    <loc>https://nickforr.com/tags/hugo/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/monte-carlo/</loc>
-    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
+    <loc>https://nickforr.com/page/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/page/</loc>
+    <loc>https://nickforr.com/post/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r-markdown/</loc>
-    <lastmod>2017-05-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/sentiment/</loc>
-    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2017-07-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/tidyverse/</loc>
+    <loc>https://nickforr.com/categories/r/</loc>
     <lastmod>2017-07-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2017-10-24T00:00:00+00:00</lastmod>
+    <loc>https://nickforr.com/tags/r-markdown/</loc>
+    <lastmod>2017-05-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nickforr.com/tags/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nickforr.com/tags/tidyverse/</loc>
+    <lastmod>2017-07-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nickforr.com/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

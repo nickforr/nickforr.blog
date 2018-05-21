@@ -2,82 +2,74 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nickforr</title>
-    <link>/</link>
+    <link>https://nickforr.com/</link>
     <description>Recent content on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 24 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nickforr.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Tidy Iliad</title>
-      <link>/2017/10/24/tidy-iliad/</link>
-      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      <title>neo-generalism</title>
+      <link>https://nickforr.com/2018/05/20/neo-generalism/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2017/10/24/tidy-iliad/</guid>
-      <description>Inspired by yet another @hrbrmstr project, I thought I’d have a go at replicating his approach for assessing the sentiment of a book, but using Homer’s Iliad. (I know, it’s not Christmas-y but hey ho ho ho).
-library(hrbrthemes) library(stringi) library(tidytext) library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.8.0 ✔ stringr 1.3.0 ## ✔ readr 1.</description>
+      <guid>https://nickforr.com/2018/05/20/neo-generalism/</guid>
+      <description>A combination of:
+ re-reading a blog by @drob encouraging aspiring data scientists to write a blog, and
+ a desire to have more people where I work writing and communicating technical ideas both to colleagues and externally
+  led me to revisit this site, something I first started about a year ago (I thought I should perhaps practice what I&amp;rsquo;m preaching).
+One thing I was struggling with was a name for the site, when I remembered an article titled &amp;lsquo;Rise of the Neo-Generalist&amp;rsquo; that I&amp;rsquo;d come across whilst researching for a talk I had to give (the talk was about future opportunities for actuarial1 skillsets).</description>
     </item>
     
     <item>
       <title>Rainfall</title>
-      <link>/2017/07/12/rainfall/</link>
+      <link>https://nickforr.com/2017/07/12/rainfall/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/07/12/rainfall/</guid>
-      <description>Wetter in the West (of Scotland)? I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
+      <guid>https://nickforr.com/2017/07/12/rainfall/</guid>
+      <description>I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
 I thought I’d take the opportunity to explore the data and play around with some visualisation…</description>
     </item>
     
     <item>
-      <title>Loopy annuities</title>
-      <link>/2017/07/06/loopy-annuities/</link>
-      <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/07/06/loopy-annuities/</guid>
-      <description>I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved uppon (I’d had nagging doubts over the approach but it worked and seemed fast enough, so hadn’t bothered refactoring it until now).
-Background is that at work we use a lot of monte carlo simulations through economic scenario generators [https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators] and so are dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.</description>
-    </item>
-    
-    <item>
       <title>Testing CI of blog</title>
-      <link>/2017/05/26/testing-ci-of-blog/</link>
+      <link>https://nickforr.com/2017/05/26/testing-ci-of-blog/</link>
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/05/26/testing-ci-of-blog/</guid>
-      <description>Testing continuous integration of blog Another brief post in order to test whether the setup for CI through Travis is working properly.
+      <guid>https://nickforr.com/2017/05/26/testing-ci-of-blog/</guid>
+      <description>Another brief post in order to test whether the setup for continuous integration through Travis is working properly.
 Some helpful links that I relied on to set everything up:
-https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws http://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-cloudfront-walkthrough.html
- </description>
+https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws http://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-cloudfront-walkthrough.html</description>
     </item>
     
     <item>
       <title>Trying out blogdown</title>
-      <link>/2017/05/24/trying-out-blogdown/</link>
+      <link>https://nickforr.com/2017/05/24/trying-out-blogdown/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017/05/24/trying-out-blogdown/</guid>
-      <description>Introduction This is just a quick check to see if I can easily add posts to this blog using blogdown.
+      <guid>https://nickforr.com/2017/05/24/trying-out-blogdown/</guid>
+      <description>This is just a quick check to see if I can easily add posts to this blog using blogdown.
 With a lack of imagination, I’m using the mtcars data set and ggplot (via tidyverse) to check it’s working ok (using viridis for colours).
- </description>
+library(tidyverse) library(viridis) mtcars %&amp;gt;% ggplot() + theme_bw() + geom_point(aes(x = disp, y = hp, colour = mpg)) + scale_color_viridis() + facet_wrap(~gear) + theme(strip.background = element_rect(fill = &amp;quot;transparent&amp;quot;)) </description>
     </item>
     
     <item>
       <title></title>
-      <link>/x_index/</link>
+      <link>https://nickforr.com/x_index/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/x_index/</guid>
+      <guid>https://nickforr.com/x_index/</guid>
       <description>Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&amp;rsquo;t want any content here.</description>
     </item>
     
     <item>
       <title>About me</title>
-      <link>/page/about/</link>
+      <link>https://nickforr.com/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/page/about/</guid>
+      <guid>https://nickforr.com/page/about/</guid>
       <description>Surely some interesting information might make it on to this page&amp;hellip;</description>
     </item>
     

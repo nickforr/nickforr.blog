@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on nickforr</title>
+    <link>https://nickforr.com/tags/hugo/</link>
+    <description>Recent content in Hugo on nickforr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 20 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nickforr.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>neo-generalism</title>
+      <link>https://nickforr.com/2018/05/20/neo-generalism/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nickforr.com/2018/05/20/neo-generalism/</guid>
+      <description>A combination of:
+ re-reading a blog by @drob encouraging aspiring data scientists to write a blog, and
+ a desire to have more people where I work writing and communicating technical ideas both to colleagues and externally
+  led me to revisit this site, something I first started about a year ago (I thought I should perhaps practice what I&amp;rsquo;m preaching).
+One thing I was struggling with was a name for the site, when I remembered an article titled &amp;lsquo;Rise of the Neo-Generalist&amp;rsquo; that I&amp;rsquo;d come across whilst researching for a talk I had to give (the talk was about future opportunities for actuarial1 skillsets).</description>
+    </item>
+    
+  </channel>
+</rss>

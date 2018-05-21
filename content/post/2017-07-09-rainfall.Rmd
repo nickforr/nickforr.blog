@@ -14,8 +14,6 @@ topics:
   - R
 ---
 
-## Wetter in the West (of Scotland)?
-
 I grew up in [Fife](https://en.wikipedia.org/wiki/Fife) and now live on the
 outskirts of Glasgow.  And maybe it's just the 'lovely' July weather we've
 been experiencing, or maybe it's just that I'm getting older and have a
@@ -30,7 +28,7 @@ visualisation...
 The Met Office provides [historic
 data](http://www.metoffice.gov.uk/public/weather/climate-historic/#?tab=climateHistoric)
 from weather stations across the UK and the stations at Leuchars (in Fife) and
-Paisley (just to the west of Glasgow) have data going back to the 1950s.
+Paisley (just to the west of Glasgow, although I live just to the south) have data going back to the 1950s.
 
 ```{r setup,  message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -72,7 +70,7 @@ allData <-
     dataDate >= max(min(leucharsData$dataDate), min(paisleyData$dataDate)))
 ```
 
-The combined data goes back to `r min(allData$yyyy)` and as a first pass, it might be helpful just to compare the total rainnfall each year:
+The combined data goes back to `r min(allData$yyyy)` and as a first pass, it might be helpful just to compare the total rainfall each year:
 
 ```{r plotAnnualTotal}
 allData %>%
@@ -93,7 +91,7 @@ allData %>%
   theme(legend.position = c(0.9, 0.2))
 ```
 
-Well, that looks pretty clear.  I really should be expecting a wetter time in the West of Scotland (nearly twice as much now, in Paisley, as I experienced as a child in the 80s).
+Well, that looks pretty clear.  I really should be expecting a wetter time in the West of Scotland (nearly twice as much now, near Paisley, as I experienced as a child in the 80s).
 
 ```{r heatmap}
 allData %>%

@@ -3,7 +3,7 @@ relativeurls = true
 DefaultContentLanguage = "en"
 title = "nickforr"
 theme = "beautifulhugo"
-paginate = 5
+paginate = 6
 metaDataFormat = "yaml"
 pygmentsStyle = "trac"
 pygmentsUseClasses = true
@@ -16,8 +16,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:year/:month/:day/:slug/"
     
 [Params]
-#  homeTitle = "Beautiful Hugo Theme" # Set a different text for the header on the home page
-  subtitle = "Build a beautiful and simple website in minutes"
+  homeTitle = "neo-generalist musings" # Set a different text for the header on the home page
+  subtitle = "Dipping a toe in the R and data science water..."
   logo = "img/main.jpeg"
   # favicon = "img/favicon.ico"
   dateFormat = "January 2, 2006"

@@ -1,0 +1,114 @@
+---
+title: Rcpp annuities
+author: nickforr
+date: '2018-05-21'
+slug: rcpp-annuities
+categories:
+  - R
+tags:
+  - Rcpp
+  - RcppArmadillo
+  - monte carlo
+  - economic scenario generator
+description: ''
+draft: true
+topics:
+  - R
+---
+
+
+
+<p>I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved upon (it worked and was reasonably fast, so hadn’t bothered refactoring it until now). Essentially it gave me an excuse to finally start exploring <a href="http://www.rcpp.org">Rcpp</a> (in this case, <a href="http://dirk.eddelbuettel.com/code/rcpp.armadillo.html">RcppArmadillo</a>).</p>
+<p>Background is that at work we use a lot of <a href="https://en.wikipedia.org/wiki/Monte_Carlo_methods_in_finance">monte carlo simulations</a> through economic scenario generators [<a href="https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators" class="uri">https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators</a>] and so are often dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.</p>
+<p>In this specific case, I was looking to calculate projections of <a href="https://en.wikipedia.org/wiki/Annuity">annuity</a> prices, across a large number of simulated paths for interest rates.</p>
+<p>The price of the annuity depends on the <a href="https://en.wikipedia.org/wiki/Life_table">survival probability</a> of the individual and the prevailing interest rate (here we make a simplifying assumption of a <a href="https://en.wikipedia.org/wiki/Yield_curve">constant term structure for interest rates</a>).</p>
+<p>But we also have many simulations (typically, 5000) of what interest rates could be, projected many years into the future (for example, 70 years), meaning we end up with a pseudo-algorithm that requires nested loops.</p>
+<p>The R code we had was already vectorised but I was curious as to what performance improvement might be possible with RcppArmadillo (which allowed me to keep much of the same algorithm logic). The rest of this post goes through the results.</p>
+<p>First set everything up:</p>
+<pre class="r"><code>library(microbenchmark) # to benchmark times
+library(Rcpp) # integrating C++ and R
+library(RcppArmadillo) # use Armadillo library
+library(ggplot2)
+library(hrbrthemes) # Thanks @hrbrmstr (https://twitter.com/hrbrmstr) 
+set.seed(1.32)
+nsim &lt;- 5000 # let&#39;s go with 5000 sims...
+nyrs &lt;- 71 # and 70 years of projections (plus the initial values)
+# I&#39;ll just create some random data for yields and the probability annuity
+# payments are made (note these are definitely not appropriate numbers for
+# actual use!)
+yieldData &lt;- matrix(rnorm(nyrs * nsim, mean = 0.03, sd = 0.02), nrow = nyrs)
+paymentProbs &lt;- rev(seq_len(nyrs)) / nyrs</code></pre>
+<p>Define functions for each of the approaches:</p>
+<pre class="r"><code>priceAnnuity_R &lt;- function(yieldData, paymentProbs) {
+  annuityPrices &lt;- yieldData * 0 # use yieldData to get 0 matrix of right dims
+  for (i in seq_len(nrow(annuityPrices))) { # projection over time
+    combinedProbs &lt;- # payment probs based on projection time
+      if (i == 1) {
+        paymentProbs
+      } else {
+        tail(paymentProbs, -i + 1) / paymentProbs[i]
+      }
+    logYields &lt;- log(1 + yieldData[i, ])
+    maturities &lt;- -(seq_along(combinedProbs) - 1)
+    projYields &lt;- exp(tcrossprod(logYields, maturities))
+    price &lt;- projYields %*% combinedProbs
+    annuityPrices[i, ] &lt;- price
+  }
+  annuityPrices
+}
+
+cppFunction(depends = &quot;RcppArmadillo&quot;, code = &#39;
+  arma::mat armaPriceAnnuity(arma::mat&amp; yieldData, arma::rowvec&amp; paymentProbs) {
+    int nproj = yieldData.n_rows;
+    int nsim = yieldData.n_cols;
+    arma::mat annuityPrices(nproj, nsim, arma::fill::zeros);
+    for (int iproj = 0; iproj &lt; nproj; ++iproj) {
+      arma::rowvec combinedProbs(nproj - iproj);
+      if (iproj == 0) {
+        combinedProbs = paymentProbs;
+      } else {
+        combinedProbs = 
+          paymentProbs.subvec(iproj, nproj - 1) / paymentProbs[iproj];
+      }
+      arma::rowvec logYields = arma::log(1.0 + yieldData.row(iproj));
+      arma::vec maturities = 
+        -(arma::cumsum(arma::vec(nproj - iproj, arma::fill::ones)) - 1.0);
+      arma::mat projYields = arma::exp(maturities * logYields);
+      arma::rowvec price = combinedProbs * projYields;
+      annuityPrices.row(iproj) = price;
+    }
+    return annuityPrices;
+  }
+&#39;)
+
+# Check functions equivalent
+all.equal(
+  priceAnnuity_R(yieldData = yieldData, paymentProbs = paymentProbs), 
+  armaPriceAnnuity(yieldData, paymentProbs)
+)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>And, finally, compare output:</p>
+<pre class="r"><code>microbenchmark(
+  R = 
+    priceAnnuity_R(yieldData = yieldData, paymentProbs = paymentProbs), 
+  RcppArmadillo = armaPriceAnnuity(yieldData, paymentProbs),
+  times = 50, unit = &quot;ms&quot;
+) -&gt; mb1
+
+# Format inspired by https://rud.is/b/2017/09/25/speeding-up-digital-arachinds/
+update_geom_defaults(&quot;violin&quot;, list(colour = &quot;#390F6E&quot;, fill = &quot;#CC3F71&quot;))
+autoplot(mb1, log = FALSE) +
+  scale_y_comma(name = &quot;milliseconds&quot;) +
+  labs(
+    title = &quot;Microbenchmark results for annuity pricing&quot;,
+    subtitle = &quot;Compares performance between R and Rcpp approaches. Lower values are better.&quot;) +
+  theme_ipsum()</code></pre>
+<p><img src="/post/2018-05-21-rcpp-annuities_files/figure-html/benchmark-1.png" width="672" /></p>
+<p>So the RcppArmadillo version<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> does appear to give a bit of a performance boost, and for very little additional effort.</p>
+<p>Whilst getting to grips with the nuances of Rcpp and RcppArmadillo takes a little effort, it’s definitely something worth exploring.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Interestingly, I was getting mixed performance results using a raw nested loop approach directly in Rcpp, depending on whether I ran this on my work windows laptop or home macbook (the nested loop approach was slower than the R approach on my macbook). This coincided with upgrading to R 3.5.0 at slightly different times, but I’m not confident enough to make any definitive statement on that!<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>

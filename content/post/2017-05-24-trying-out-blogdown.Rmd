@@ -12,17 +12,14 @@ draft: no
 topics: []
 ---
 
-## Introduction
-
 This is just a quick check to see if I can easily add posts to this blog using  [blogdown](https://github.com/rstudio/blogdown).
 
 With a lack of imagination, I'm using the mtcars data set and ggplot (via [tidyverse](http://tidyverse.org)) to check it's working ok (using [viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html) for colours).
 
-```{r test, echo = FALSE, message = FALSE}
+```{r test, echo = TRUE, message = FALSE}
 library(tidyverse)
 library(viridis)
 mtcars %>%
-  #mutate(gear = factor(gear)) %>%
   ggplot() +
   theme_bw() +
   geom_point(aes(x = disp, y = hp, colour = mpg)) +

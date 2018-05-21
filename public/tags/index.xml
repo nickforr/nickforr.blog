@@ -2,74 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on nickforr</title>
-    <link>/tags/</link>
+    <link>https://nickforr.com/tags/</link>
     <description>Recent content in Tags on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 06 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nickforr.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Economic Scenario Generator</title>
-      <link>/tags/economic-scenario-generator/</link>
-      <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
+      <title>Blogdown</title>
+      <link>https://nickforr.com/tags/blogdown/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/economic-scenario-generator/</guid>
+      <guid>https://nickforr.com/tags/blogdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ggplot2</title>
-      <link>/tags/ggplot2/</link>
+      <link>https://nickforr.com/tags/ggplot2/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ggplot2/</guid>
+      <guid>https://nickforr.com/tags/ggplot2/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Loops</title>
-      <link>/tags/loops/</link>
-      <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
+      <title>Hugo</title>
+      <link>https://nickforr.com/tags/hugo/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/loops/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Monte Carlo</title>
-      <link>/tags/monte-carlo/</link>
-      <pubDate>Thu, 06 Jul 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/monte-carlo/</guid>
+      <guid>https://nickforr.com/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Markdown</title>
-      <link>/tags/r-markdown/</link>
+      <link>https://nickforr.com/tags/r-markdown/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r-markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sentiment</title>
-      <link>/tags/sentiment/</link>
-      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/sentiment/</guid>
+      <guid>https://nickforr.com/tags/r-markdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tidyverse</title>
-      <link>/tags/tidyverse/</link>
+      <link>https://nickforr.com/tags/tidyverse/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/tidyverse/</guid>
+      <guid>https://nickforr.com/tags/tidyverse/</guid>
       <description></description>
     </item>
     

@@ -16,8 +16,6 @@ topics:
 
 
 
-<div id="wetter-in-the-west-of-scotland" class="section level2">
-<h2>Wetter in the West (of Scotland)?</h2>
 <p>I grew up in <a href="https://en.wikipedia.org/wiki/Fife">Fife</a> and now live on the
 outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve
 been experiencing, or maybe it’s just that I’m getting older and have a
@@ -30,7 +28,7 @@ visualisation…</p>
 <p>The Met Office provides <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/#?tab=climateHistoric">historic
 data</a>
 from weather stations across the UK and the stations at Leuchars (in Fife) and
-Paisley (just to the west of Glasgow) have data going back to the 1950s.</p>
+Paisley (just to the west of Glasgow, although I live just to the south) have data going back to the 1950s.</p>
 <pre class="r"><code>library(tidyverse)
 library(stringr)
 library(viridis)
@@ -65,7 +63,7 @@ allData &lt;-
   dplyr::bind_rows(.id = &quot;station&quot;) %&gt;%
   dplyr::filter(
     dataDate &gt;= max(min(leucharsData$dataDate), min(paisleyData$dataDate)))</code></pre>
-<p>The combined data goes back to 1959 and as a first pass, it might be helpful just to compare the total rainnfall each year:</p>
+<p>The combined data goes back to 1959 and as a first pass, it might be helpful just to compare the total rainfall each year:</p>
 <pre class="r"><code>allData %&gt;%
   group_by(station, yyyy) %&gt;%
   dplyr::summarise(annualRainfall = sum(rain)) %&gt;%
@@ -83,7 +81,7 @@ allData &lt;-
   xlab(NULL) + ylab(&quot;Annual rainfall (mm)&quot;) +
   theme(legend.position = c(0.9, 0.2))</code></pre>
 <p><img src="/post/2017-07-09-rainfall_files/figure-html/plotAnnualTotal-1.png" width="672" /></p>
-<p>Well, that looks pretty clear. I really should be expecting a wetter time in the West of Scotland (nearly twice as much now, in Paisley, as I experienced as a child in the 80s).</p>
+<p>Well, that looks pretty clear. I really should be expecting a wetter time in the West of Scotland (nearly twice as much now, near Paisley, as I experienced as a child in the 80s).</p>
 <pre class="r"><code>allData %&gt;%
   ggplot() +
   geom_tile(
@@ -121,5 +119,4 @@ allData &lt;-
   )</code></pre>
 <p><img src="/post/2017-07-09-rainfall_files/figure-html/summerHeatmap-1.png" width="672" /></p>
 <p>Whilst there doesn’t appear to be too much difference over the last few years in July, it’s still a lot wetter over in the West now than it was when I was growing up!</p>
-</div>
 </div>
