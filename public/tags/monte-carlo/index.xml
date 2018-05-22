@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Monte Carlo on nickforr</title>
-    <link>/tags/monte-carlo/</link>
+    <link>https://nickforr.com/tags/monte-carlo/</link>
     <description>Recent content in Monte Carlo on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 21 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/monte-carlo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nickforr.com/tags/monte-carlo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Rcpp annuities</title>
-      <link>/2018/05/21/rcpp-annuities/</link>
+      <link>https://nickforr.com/2018/05/21/rcpp-annuities/</link>
       <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/05/21/rcpp-annuities/</guid>
+      <guid>https://nickforr.com/2018/05/21/rcpp-annuities/</guid>
       <description>I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved upon (it worked and was reasonably fast, so hadn’t bothered refactoring it until now). Essentially it gave me an excuse to finally start exploring Rcpp (in this case, RcppArmadillo).
 Background is that at work we use a lot of monte carlo simulations through economic scenario generators [https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators] and so are often dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.</description>
     </item>
