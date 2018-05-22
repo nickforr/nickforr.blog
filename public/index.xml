@@ -2,20 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>nickforr</title>
-    <link>https://nickforr.com/</link>
+    <link>/</link>
     <description>Recent content on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 20 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://nickforr.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Rcpp annuities</title>
+      <link>/2018/05/21/rcpp-annuities/</link>
+      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/05/21/rcpp-annuities/</guid>
+      <description>I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved upon (it worked and was reasonably fast, so hadn’t bothered refactoring it until now). Essentially it gave me an excuse to finally start exploring Rcpp (in this case, RcppArmadillo).
+Background is that at work we use a lot of monte carlo simulations through economic scenario generators [https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators] and so are often dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.</description>
+    </item>
+    
+    <item>
       <title>neo-generalism</title>
-      <link>https://nickforr.com/2018/05/20/neo-generalism/</link>
+      <link>/2018/05/20/neo-generalism/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://nickforr.com/2018/05/20/neo-generalism/</guid>
+      <guid>/2018/05/20/neo-generalism/</guid>
       <description>A combination of:
  re-reading a blog by @drob encouraging aspiring data scientists to write a blog, and
  a desire to have more people where I work writing and communicating technical ideas both to colleagues and externally
@@ -24,21 +34,31 @@ One thing I was struggling with was a name for the site, when I remembered an ar
     </item>
     
     <item>
+      <title>Tidy Iliad</title>
+      <link>/2017/10/24/tidy-iliad/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/10/24/tidy-iliad/</guid>
+      <description>Inspired by yet another @hrbrmstr project, I thought I’d have a go at replicating his approach for assessing the sentiment of a book, but using Homer’s Iliad. (I know, it’s not Christmas-y but hey ho ho ho).
+library(hrbrthemes) library(stringi) library(tidytext) library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.8.1 ✔ stringr 1.3.1 ## ✔ readr 1.</description>
+    </item>
+    
+    <item>
       <title>Rainfall</title>
-      <link>https://nickforr.com/2017/07/12/rainfall/</link>
+      <link>/2017/07/12/rainfall/</link>
       <pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://nickforr.com/2017/07/12/rainfall/</guid>
+      <guid>/2017/07/12/rainfall/</guid>
       <description>I grew up in Fife and now live on the outskirts of Glasgow. And maybe it’s just the ‘lovely’ July weather we’ve been experiencing, or maybe it’s just that I’m getting older and have a selective memory for the past, but I don’t recall summers being quite so wet when I was growing up!
 I thought I’d take the opportunity to explore the data and play around with some visualisation…</description>
     </item>
     
     <item>
       <title>Testing CI of blog</title>
-      <link>https://nickforr.com/2017/05/26/testing-ci-of-blog/</link>
+      <link>/2017/05/26/testing-ci-of-blog/</link>
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://nickforr.com/2017/05/26/testing-ci-of-blog/</guid>
+      <guid>/2017/05/26/testing-ci-of-blog/</guid>
       <description>Another brief post in order to test whether the setup for continuous integration through Travis is working properly.
 Some helpful links that I relied on to set everything up:
 https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws http://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-cloudfront-walkthrough.html</description>
@@ -46,10 +66,10 @@ https://stormpath.com/blog/ultimate-guide-deploying-static-site-aws http://docs.
     
     <item>
       <title>Trying out blogdown</title>
-      <link>https://nickforr.com/2017/05/24/trying-out-blogdown/</link>
+      <link>/2017/05/24/trying-out-blogdown/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://nickforr.com/2017/05/24/trying-out-blogdown/</guid>
+      <guid>/2017/05/24/trying-out-blogdown/</guid>
       <description>This is just a quick check to see if I can easily add posts to this blog using blogdown.
 With a lack of imagination, I’m using the mtcars data set and ggplot (via tidyverse) to check it’s working ok (using viridis for colours).
 library(tidyverse) library(viridis) mtcars %&amp;gt;% ggplot() + theme_bw() + geom_point(aes(x = disp, y = hp, colour = mpg)) + scale_color_viridis() + facet_wrap(~gear) + theme(strip.background = element_rect(fill = &amp;quot;transparent&amp;quot;)) </description>
@@ -57,19 +77,19 @@ library(tidyverse) library(viridis) mtcars %&amp;gt;% ggplot() + theme_bw() + ge
     
     <item>
       <title></title>
-      <link>https://nickforr.com/x_index/</link>
+      <link>/x_index/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://nickforr.com/x_index/</guid>
+      <guid>/x_index/</guid>
       <description>Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&amp;rsquo;t want any content here.</description>
     </item>
     
     <item>
       <title>About me</title>
-      <link>https://nickforr.com/page/about/</link>
+      <link>/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://nickforr.com/page/about/</guid>
+      <guid>/page/about/</guid>
       <description>Surely some interesting information might make it on to this page&amp;hellip;</description>
     </item>
     

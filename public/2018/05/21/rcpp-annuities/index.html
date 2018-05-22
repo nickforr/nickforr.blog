@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Rcpp annuities</title>
+  <meta property="og:title" content="Rcpp annuities" />
+  <meta name="twitter:title" content="Rcpp annuities" />
+  <meta name="description" content="I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved upon (it worked and was reasonably fast, so hadn’t bothered refactoring it until now). Essentially it gave me an excuse to finally start exploring Rcpp (in this case, RcppArmadillo).
+Background is that at work we use a lot of monte carlo simulations through economic scenario generators [https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators] and so are often dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.">
+  <meta property="og:description" content="I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved upon (it worked and was reasonably fast, so hadn’t bothered refactoring it until now). Essentially it gave me an excuse to finally start exploring Rcpp (in this case, RcppArmadillo).
+Background is that at work we use a lot of monte carlo simulations through economic scenario generators [https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators] and so are often dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.">
+  <meta name="twitter:description" content="I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved upon (it worked and was reasonably fast, so hadn’t bothered refactoring it until …">
+  <meta name="author" content="Nick Forrester"/>
+  <meta property="og:image" content="/img/main.jpeg" />
+  <meta name="twitter:image" content="/img/main.jpeg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@nickforr" />
+  <meta name="twitter:creator" content="@nickforr" />
+  <meta property="og:url" content="/2018/05/21/rcpp-annuities/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="nickforr" />
+
+  <meta name="generator" content="Hugo 0.40.3" />
+  <link rel="canonical" href="../../../../2018/05/21/rcpp-annuities/" />
+  <link rel="alternate" href="../../../../index.xml" type="application/rss+xml" title="nickforr">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../../css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="../../../../css/highlight.min.css" /><link rel="stylesheet" href="../../../../css/codeblock.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-119465042-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../../../../">nickforr</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="../../../../">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="../../../../page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="../../../../tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="nickforr" href="../../../../">
+            <img class="avatar-img" src="../../../../img/main.jpeg" alt="nickforr" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Rcpp annuities</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on May 21, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 4 minutes (689 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>I was tidying up some R code that involved some ‘looping’ and wondered whether the approach I’d taken could be improved upon (it worked and was reasonably fast, so hadn’t bothered refactoring it until now). Essentially it gave me an excuse to finally start exploring <a href="http://www.rcpp.org">Rcpp</a> (in this case, <a href="http://dirk.eddelbuettel.com/code/rcpp.armadillo.html">RcppArmadillo</a>).</p>
+<p>Background is that at work we use a lot of <a href="https://en.wikipedia.org/wiki/Monte_Carlo_methods_in_finance">monte carlo simulations</a> through economic scenario generators [<a href="https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators" class="uri">https://www.actuaries.org.uk/learn-develop/attend-event/economic-scenario-generators</a>] and so are often dealing with matrices with dimensions representing timesteps (for projecting, for example, interest rates) and simulations.</p>
+<p>In this specific case, I was looking to calculate projections of <a href="https://en.wikipedia.org/wiki/Annuity">annuity</a> prices, across a large number of simulated paths for interest rates.</p>
+<p>The price of the annuity depends on the <a href="https://en.wikipedia.org/wiki/Life_table">survival probability</a> of the individual and the prevailing interest rate (here we make a simplifying assumption of a <a href="https://en.wikipedia.org/wiki/Yield_curve">constant term structure for interest rates</a>).</p>
+<p>But we also have many simulations (typically, 5000) of what interest rates could be, projected many years into the future (for example, 70 years), meaning we end up with a pseudo-algorithm that requires nested loops.</p>
+<p>The R code we had was already vectorised but I was curious as to what performance improvement might be possible with RcppArmadillo (which allowed me to keep much of the same algorithm logic). The rest of this post goes through the results.</p>
+<p>First set everything up:</p>
+<pre class="r"><code>library(microbenchmark) # to benchmark times
+library(Rcpp) # integrating C++ and R
+library(RcppArmadillo) # use Armadillo library
+library(ggplot2)
+library(hrbrthemes) # Thanks @hrbrmstr (https://twitter.com/hrbrmstr) 
+set.seed(1.32)
+nsim &lt;- 5000 # let&#39;s go with 5000 sims...
+nyrs &lt;- 71 # and 70 years of projections (plus the initial values)
+# I&#39;ll just create some random data for yields and the probability annuity
+# payments are made (note these are definitely not appropriate numbers for
+# actual use!)
+yieldData &lt;- matrix(rnorm(nyrs * nsim, mean = 0.03, sd = 0.02), nrow = nyrs)
+paymentProbs &lt;- rev(seq_len(nyrs)) / nyrs</code></pre>
+<p>Define functions for each of the approaches:</p>
+<pre class="r"><code>priceAnnuity_R &lt;- function(yieldData, paymentProbs) {
+  annuityPrices &lt;- yieldData * 0 # use yieldData to get 0 matrix of right dims
+  for (i in seq_len(nrow(annuityPrices))) { # projection over time
+    combinedProbs &lt;- # payment probs based on projection time
+      if (i == 1) {
+        paymentProbs
+      } else {
+        tail(paymentProbs, -i + 1) / paymentProbs[i]
+      }
+    logYields &lt;- log(1 + yieldData[i, ])
+    maturities &lt;- -(seq_along(combinedProbs) - 1)
+    projYields &lt;- exp(tcrossprod(logYields, maturities))
+    price &lt;- projYields %*% combinedProbs
+    annuityPrices[i, ] &lt;- price
+  }
+  annuityPrices
+}
+
+cppFunction(depends = &quot;RcppArmadillo&quot;, code = &#39;
+  arma::mat armaPriceAnnuity(arma::mat&amp; yieldData, arma::rowvec&amp; paymentProbs) {
+    int nproj = yieldData.n_rows;
+    int nsim = yieldData.n_cols;
+    arma::mat annuityPrices(nproj, nsim, arma::fill::zeros);
+    for (int iproj = 0; iproj &lt; nproj; ++iproj) {
+      arma::rowvec combinedProbs(nproj - iproj);
+      if (iproj == 0) {
+        combinedProbs = paymentProbs;
+      } else {
+        combinedProbs = 
+          paymentProbs.subvec(iproj, nproj - 1) / paymentProbs[iproj];
+      }
+      arma::rowvec logYields = arma::log(1.0 + yieldData.row(iproj));
+      arma::vec maturities = 
+        -(arma::cumsum(arma::vec(nproj - iproj, arma::fill::ones)) - 1.0);
+      arma::mat projYields = arma::exp(maturities * logYields);
+      arma::rowvec price = combinedProbs * projYields;
+      annuityPrices.row(iproj) = price;
+    }
+    return annuityPrices;
+  }
+&#39;)
+
+# Check functions equivalent
+all.equal(
+  priceAnnuity_R(yieldData = yieldData, paymentProbs = paymentProbs), 
+  armaPriceAnnuity(yieldData, paymentProbs)
+)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>And, finally, compare output:</p>
+<pre class="r"><code>microbenchmark(
+  R = 
+    priceAnnuity_R(yieldData = yieldData, paymentProbs = paymentProbs), 
+  RcppArmadillo = armaPriceAnnuity(yieldData, paymentProbs),
+  times = 50, unit = &quot;ms&quot;
+) -&gt; mb1
+
+# Format inspired by https://rud.is/b/2017/09/25/speeding-up-digital-arachinds/
+update_geom_defaults(&quot;violin&quot;, list(colour = &quot;#390F6E&quot;, fill = &quot;#CC3F71&quot;))
+autoplot(mb1, log = FALSE) +
+  scale_y_comma(name = &quot;milliseconds&quot;) +
+  labs(
+    title = &quot;Microbenchmark results for annuity pricing&quot;,
+    subtitle = &quot;Compares performance between R and Rcpp approaches. Lower values are better.&quot;) +
+  theme_ipsum()</code></pre>
+<p><img src="../../../../post/2018-05-21-rcpp-annuities_files/figure-html/benchmark-1.png" width="672" /></p>
+<p>So the RcppArmadillo version<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> does appear to give a bit of a performance boost, and for very little additional effort.</p>
+<p>Whilst getting to grips with the nuances of Rcpp and RcppArmadillo takes a little effort, it’s definitely something worth exploring.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Interestingly, I was getting mixed performance results using a raw nested loop approach directly in Rcpp, depending on whether I ran this on my work windows laptop or home macbook (the nested loop approach was slower than the R approach on my macbook). This coincided with upgrading to R 3.5.0 at slightly different times, but I’m not confident enough to make any definitive statement on that!<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="//tags/rcpp/">Rcpp</a>&nbsp;
+            
+              <a href="//tags/rcpparmadillo/">RcppArmadillo</a>&nbsp;
+            
+              <a href="//tags/monte-carlo/">monte carlo</a>&nbsp;
+            
+              <a href="//tags/economic-scenario-generator/">economic scenario generator</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <ul class="list-inline footer-links">
+                
+
+
+<li>
+    <a href="//twitter.com/share?url=%2f2018%2f05%2f21%2frcpp-annuities%2f&amp;text=Rcpp%20annuities&amp;via=nickforr"
+       target="_blank" alt="" title="Share on Twitter">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//plus.google.com/share?url=%2f2018%2f05%2f21%2frcpp-annuities%2f" target="_blank" title="Share on Google Plus">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.facebook.com/sharer/sharer.php?u=%2f2018%2f05%2f21%2frcpp-annuities%2f" target="_blank" title="Share on Facebook">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//reddit.com/submit?url=%2f2018%2f05%2f21%2frcpp-annuities%2f&amp;title=Rcpp%20annuities" target="_blank" title="Share on Reddit">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.linkedin.com/shareArticle?url=%2f2018%2f05%2f21%2frcpp-annuities%2f&amp;title=Rcpp%20annuities" target="_blank"
+       title="Share on LinkedIn">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.stumbleupon.com/submit?url=%2f2018%2f05%2f21%2frcpp-annuities%2f&amp;title=Rcpp%20annuities" target="_blank"
+       title="Share on StumbleUpon">
+        <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stumbleupon fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+
+<li>
+    <a href="//www.pinterest.com/pin/create/button/?url=%2f2018%2f05%2f21%2frcpp-annuities%2f&amp;description=Rcpp%20annuities" target="_blank"
+       title="Share on Pinterest">
+         <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+              </span>
+    </a>
+</li>
+
+              </ul>
+            </section>
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="../../../../2018/05/20/neo-generalism/" data-toggle="tooltip" data-placement="top" title="neo-generalism">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/nickforr" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/nickforr" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/5812231/nick-f" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="../../../../index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="nickforr.com">Nick Forrester</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="../../../../">nickforr</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.40.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../../../js/main.js"></script>
+<script src="../../../../js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="../../../../js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

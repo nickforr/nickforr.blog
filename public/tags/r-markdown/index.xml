@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R Markdown on nickforr</title>
-    <link>https://nickforr.com/tags/r-markdown/</link>
+    <link>/tags/r-markdown/</link>
     <description>Recent content in R Markdown on nickforr</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://nickforr.com/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Trying out blogdown</title>
-      <link>https://nickforr.com/2017/05/24/trying-out-blogdown/</link>
+      <link>/2017/05/24/trying-out-blogdown/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://nickforr.com/2017/05/24/trying-out-blogdown/</guid>
+      <guid>/2017/05/24/trying-out-blogdown/</guid>
       <description>This is just a quick check to see if I can easily add posts to this blog using blogdown.
 With a lack of imagination, I’m using the mtcars data set and ggplot (via tidyverse) to check it’s working ok (using viridis for colours).
 library(tidyverse) library(viridis) mtcars %&amp;gt;% ggplot() + theme_bw() + geom_point(aes(x = disp, y = hp, colour = mpg)) + scale_color_viridis() + facet_wrap(~gear) + theme(strip.background = element_rect(fill = &amp;quot;transparent&amp;quot;)) </description>
